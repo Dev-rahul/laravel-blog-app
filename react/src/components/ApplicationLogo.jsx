@@ -1,11 +1,15 @@
-import viteLogo from 'images/logo-with-shadow.png';
+import uniLogo from "images/uni-blog.png";
+import uniLogoBlack from "images/uni-blog-black.png";
 
-const ApplicationLogo = props => (
-  <img
-    alt='vite - logo'
-    src={viteLogo}
-    {...props}
-  />
-)
 
-export default ApplicationLogo
+const ApplicationLogo = (props) => (
+    <>
+        {props.dark ? (
+            <img alt="Uni Blog" src={uniLogo} {...props} />
+        ) : (
+            <img alt="Uni Blog" src={uniLogoBlack} {...props} />
+        )}
+    </>
+);
+
+export default ApplicationLogo;

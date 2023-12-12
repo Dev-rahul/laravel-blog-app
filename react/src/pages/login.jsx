@@ -32,7 +32,7 @@ const Login = () => {
       <AuthCard
         logo={
           <Link to="/">
-            <ApplicationLogo className="w-40 h-40" />
+            <ApplicationLogo className="w-80 h-40" />
           </Link>
         }>
         {/* Session Status */}
