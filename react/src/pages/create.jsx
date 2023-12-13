@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import AppLayout from "components/Layouts/AppLayout";
 import Input from "components/Input";
 import Label from "components/Label";
 import ReactQuill from "react-quill";
+import { useAuth } from 'hooks/auth'
+import { useNavigate } from "react-router-dom";
+import axios from "lib/axios";
+
 import "react-quill/dist/quill.snow.css";
+
 function Create(props) {
+    const navigate = useNavigate();
+
     const [content, setContent] = useState("");
     const [title, setTitle] = useState("");
+
+    const {  user } = useAuth({ middleware: 'auth' })
+    const ref = useRef(null);
+
 
    const modules = {
         toolbar: [
@@ -27,7 +38,25 @@ function Create(props) {
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('data', content)
+        const editor = ref.current.getEditor();
+        const unprivilegedEditor = ref.current.makeUnprivilegedEditor(editor);
+        const plainText = unprivilegedEditor.getText();
+        console.log('data', content, plainText)
+
+        axios.post('/api/blog/create', {
+            title: title,
+            content : content,
+            author_id: user.id,
+            author_name : user.name,
+            plain_text : plainText.substring(0, 200)
+        })
+        .then(function (res) {
+         console.log(res)
+         navigate('/dashboard')
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
       }
 
     return (
@@ -65,6 +94,7 @@ function Create(props) {
                                 </label>
                                 <div className="bg-white">
                                     <ReactQuill
+                                        ref={ref}
                                         className="border rounded-md focus:outline-none focus:ring focus:border-blue-300 "
                                         theme="snow"
                                         modules={modules}

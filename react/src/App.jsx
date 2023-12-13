@@ -8,6 +8,8 @@ import ForgotPassword from 'pages/forgot-password';
 import PasswordReset from 'pages/password-reset';
 import NotFoundPage from 'pages/404';
 import Create from 'pages/create';
+import BlogPost from 'pages/blogPost';
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
         <Route path="/password-reset/:token" element={<PasswordReset />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="*" element={<NotFoundPage/>}
         />
       </Routes>

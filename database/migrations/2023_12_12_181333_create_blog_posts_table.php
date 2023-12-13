@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->string("content");
+            $table->string("content", 10000);
             $table->bigInteger('likes')->default(0);
             $table->bigInteger('views')->default(0);
+            $table->string("author_name");
+            $table->string("plain_text");
             $table->bigInteger('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
