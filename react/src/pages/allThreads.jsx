@@ -8,6 +8,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
 
 const AllThreads = () => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [lastPage, setLastPage] = useState(1)
 
     const { data, error, isLoading } = useSWR(
         `/api/blog?page=${currentPage}`,
@@ -15,15 +16,21 @@ const AllThreads = () => {
             axios
                 .get(url)
                 .then((res) => {
+                    setLastPage(res.data.last_page);
                     return res.data;
                 })
                 .catch((error) => {
                     if (error.response.status !== 409) throw error;
-                })
+                }),
+                {
+                    initialData: currentPage,
+                    revalidateOnMount: true,
+                }
     );
 
     const handlePageClick = (event) => {
-        setCurrentPage(event.selected + 1);
+        console.log(event.selected)
+        setCurrentPage(event.selected + 1 );
     };
 
     if (error) return <div>Error fetching data</div>;
@@ -40,8 +47,8 @@ const AllThreads = () => {
                 pageClassName="isolate inline-flex -space-x-px rounded-md shadow-sm"
                 pageLinkClassName="relative inline-flex items-center px-4 py-2 text-sm font-semibold  ring-1 ring-inset ring-gray-300 hover:bg-blue-600 hover:text-[#FFFFFF] focus:z-20 focus:outline-offset-0"
                 activeClassName="relative z-10 inline-flex items-center bg-blue-500 text-sm font-semibold text-[#FFFFFF] focus:z-20 focus-visible:bg-blue-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                pageRangeDisplayed={2}
-                pageCount={data.last_page ?? 1}
+                pageRangeDisplayed={5}
+                pageCount={lastPage}
                 previousLabel={previousLabel}
                 renderOnZeroPageCount={null}
             />

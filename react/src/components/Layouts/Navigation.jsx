@@ -31,7 +31,7 @@ const Navigation = ({ user }) => {
                 Dashboard
               </CustomNavLink>
               <CustomNavLink
-                to={`/profile/${user.id}`}
+                to={`/profile/${user?.id}`}
               >
                 My Blogs
               </CustomNavLink>

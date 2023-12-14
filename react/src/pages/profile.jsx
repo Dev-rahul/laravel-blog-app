@@ -21,7 +21,7 @@ const Profile = () => {
             })
             .catch((error) => {
                 if (error.response.status !== 409) throw error;
-            })
+            }),
     );
 
     const handleBlogPageClick = (event) => {
