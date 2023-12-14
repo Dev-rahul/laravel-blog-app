@@ -38,16 +38,15 @@ class UserProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request,string $id)
     {
-        $user = User::with('comment')->with('blogPost')->find($id);
-        //$blog = BlogPost::with('comments')->find($id);
-
-        // if (!$user) {
-        //     return response()->json(['error' => 'User not found'], 404);
-        // }
-
-    
+        $blogPage = $request->query('blogPage', 1);
+        $commentPage = $request->query('commentPage', 1); 
+        $user = User::with(['comment' => function ($query) use ($commentPage) {
+            $query->orderBy('created_at', 'desc')->paginate(5);
+        }, 'blogPost' => function ($query) use ($blogPage) {
+            $query->orderBy('created_at', 'desc')->paginate(5);
+        }])->find($id);
 
         return response()->json($user);
     

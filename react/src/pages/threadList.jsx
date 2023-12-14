@@ -5,7 +5,7 @@ import { HandThumbUpIcon, EyeIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "hooks/auth";
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
-const ThreadList = ({ threads }) => {
+const ThreadList = ({ threads, type  }) => {
     const navigate = useNavigate();
     const { user } = useAuth({ middleware: "auth" });
 
@@ -29,9 +29,10 @@ const ThreadList = ({ threads }) => {
                     <div className="flex justify-between mt-4">
                         <div className="flex items-center text-gray-500">
                             <EyeIcon className="h-5 w-5 text-gray-500 mr-1" />
-                            <span className="text-gray-500">
+                            {type==="comment" ?<span className="text-gray-500">
                                 {thread.views}
-                            </span>
+                            </span> :null}
+                            
                             <HandThumbUpIcon className="h-5 w-5 ml-2 mr-1" />
                             <span className="text-gray-500">
                                 {thread.likes}

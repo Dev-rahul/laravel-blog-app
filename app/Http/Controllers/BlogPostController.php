@@ -13,11 +13,9 @@ class BlogPostController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
-        $blogs =  BlogPost::paginate(10);
-       // return BlogPost::with('user:id,name')->orderBy('created_at', 'desc')->paginate(10);
-    //    $comments = Comment::with('user')->where('blog_post_id', $blogPostId)->get();
-
+        $page = $request->input('page', 1);
+        $blogs =  BlogPost::orderBy('created_at', 'desc')->paginate(2, ['*'], 'page', $page);
+     
 
        return response()->json($blogs);
 
