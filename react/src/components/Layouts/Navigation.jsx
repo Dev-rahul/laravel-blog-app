@@ -8,7 +8,7 @@ import CustomNavLink from 'components/NavLink';
 import {Link} from 'react-router-dom';
 
 const Navigation = ({ user }) => {
-  const { logout } = useAuth()
+  const {logout } = useAuth()
   const [open, setOpen] = useState(false)
 
   return (
@@ -31,7 +31,7 @@ const Navigation = ({ user }) => {
                 Dashboard
               </CustomNavLink>
               <CustomNavLink
-                to="/myBlogs"
+                to={`/profile/${user.id}`}
               >
                 My Blogs
               </CustomNavLink>

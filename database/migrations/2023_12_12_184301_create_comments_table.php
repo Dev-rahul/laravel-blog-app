@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('content', 1000);
             $table->bigInteger('likes')->default(0);
             $table->bigInteger('dislike')->default(0);
-            $table->bigInteger('author_id')->unsigned();
             $table->string("author_name");
+            $table->bigInteger('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->bigInteger('blog_post_id')->unsigned();

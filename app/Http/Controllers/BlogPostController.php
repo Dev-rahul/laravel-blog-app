@@ -11,12 +11,10 @@ class BlogPostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogs =  BlogPost::with(['user' => function ($query) {
-            $query->where('name', 'id');
-         
-        }])->get();
+        $perPage = $request->input('perPage', 10);
+        $blogs =  BlogPost::paginate(10);
        // return BlogPost::with('user:id,name')->orderBy('created_at', 'desc')->paginate(10);
     //    $comments = Comment::with('user')->where('blog_post_id', $blogPostId)->get();
 

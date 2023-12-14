@@ -10,6 +10,7 @@ import NotFoundPage from 'pages/404';
 import Create from 'pages/create';
 import BlogPost from 'pages/blogPost';
 import Edit from 'pages/edit';
+import Profile from 'pages/profile';
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
         <Route path="/create" element={<Create />} />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/profile/:id" element={<Profile />} />
+
         <Route path="*" element={<NotFoundPage/>}
         />
       </Routes>

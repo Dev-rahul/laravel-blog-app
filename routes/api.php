@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +42,7 @@ Route::middleware(['auth:sanctum'])->patch('blog/{id}',[BlogPostController::clas
 Route::middleware(['auth:sanctum'])->post('comment',[CommentController::class, 'store'] );
 Route::middleware(['auth:sanctum'])->patch('comment/{id}',[CommentController::class, 'update'] );
 
+//Profile APIs
+Route::middleware(['auth:sanctum'])->get('profile/{id}',[UserProfileController::class, 'show'] );
 
 

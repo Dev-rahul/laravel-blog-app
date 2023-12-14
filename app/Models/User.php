@@ -52,8 +52,8 @@ class User extends Authenticatable
         return $this->hasMany(BlogPost::class, 'author_id');
     }
 
-    public function comments()
+    public function comment()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class,'author_id');
     }
 }

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import AvatarIcon from "components/Avatar";
 import { HandThumbUpIcon, EyeIcon } from "@heroicons/react/20/solid";
 import { useAuth } from "hooks/auth";
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 
 const ThreadList = ({ threads }) => {
     const navigate = useNavigate();
@@ -10,6 +11,7 @@ const ThreadList = ({ threads }) => {
 
     return (
         <div>
+            
             {threads.map((thread) => (
                 <div
                     onClick={() => navigate(`/blog/${thread.id}`)}
