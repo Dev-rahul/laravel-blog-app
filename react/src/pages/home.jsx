@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import { useAuth } from 'hooks/auth'
-import reactLogo from 'images/logo512.png';
 import ApplicationLogo from 'components/ApplicationLogo';
 
 function Home() {

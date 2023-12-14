@@ -5,10 +5,11 @@ import { DropdownButton } from 'components/DropdownLink'
 import { useAuth } from 'hooks/auth'
 import { useState } from 'react'
 import CustomNavLink from 'components/NavLink';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 const Navigation = ({ user }) => {
   const {logout } = useAuth()
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false)
 
   return (
@@ -63,9 +64,16 @@ const Navigation = ({ user }) => {
                 </button>
               }>
               {/* Authentication */}
+              <DropdownButton onClick={() =>
+                        navigate(
+                            `/myAccount`
+                        )}>
+                My Account
+              </DropdownButton>
               <DropdownButton onClick={logout}>
                 Logout
               </DropdownButton>
+            
             </Dropdown>
           </div>
           {/* Hamburger */}

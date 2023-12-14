@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use App\Notifications\CommentNotification;
+use Illuminate\Support\Facades\Notification;
+
 
 class CommentController extends Controller
 {
@@ -41,6 +44,17 @@ class CommentController extends Controller
         $comment->author_name = $request->user()->name;
 
         $comment->save();
+
+    
+        $blogPost = $comment->blogPost;
+
+        // Check if the post exists and has an owner
+        if ($blogPost && $blogPost->user) {
+            // Notify the post owner
+            Notification::send($blogPost->user, new CommentNotification($comment));
+        }
+
+        //$postOwner->notify(new CommentNotification);
 
         return response()->json(['status' => __(true)]);
     }

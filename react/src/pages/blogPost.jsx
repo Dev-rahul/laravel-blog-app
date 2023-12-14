@@ -1,7 +1,7 @@
 import { useState, useEffect, Fragment } from "react";
 import axios from "lib/axios";
 import AppLayout from "components/Layouts/AppLayout";
-import { useFetcher, useParams } from "react-router-dom";
+import { useFetcher, useParams , useNavigate} from "react-router-dom";
 import AvatarIcon from "components/Avatar";
 import { HandThumbUpIcon, EyeIcon } from "@heroicons/react/20/solid";
 import useSWR from "swr";
@@ -11,6 +11,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 const BlogPost = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const { user } = useAuth({ middleware: "auth" });
     const [isOpen, setIsOpen] = useState(false);
     const [likes, setLikes] = useState(0);
@@ -162,7 +163,10 @@ const BlogPost = () => {
             <div className="max-w-2xl mx-auto my-8 bg-gray-100 p-8 rounded-md shadow-md">
                 <div className="relative z-10 text-gray-800">
                     <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center">
+                        <div onClick={() =>
+                        navigate(
+                            `/profile/${data.author_id}`
+                        )}  className="flex items-center">
                             <AvatarIcon name={data.author_name} />
                             <div className="ml-4">
                                 <p className="text-gray-600">
@@ -218,7 +222,10 @@ const BlogPost = () => {
                             data.comments.map((comment) => (
                                 <div key={comment.id} className="mb-4">
                                     <div className="flex  justify-between">
-                                        <div className="flex items-center mb-2">
+                                        <div onClick={() =>
+                        navigate(
+                            `/profile/${comment.author_id}`
+                        )} className="flex items-center mb-2">
                                             <AvatarIcon
                                                 name={comment.author_name}
                                             />

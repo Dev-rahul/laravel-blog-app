@@ -47,6 +47,7 @@ class UserProfileController extends Controller
         }, 'blogPost' => function ($query) use ($blogPage) {
             $query->orderBy('created_at', 'desc')->paginate(2, ['*'], 'page', $blogPage);
         }])->find($id);
+        
 
         return response()->json($user);
     

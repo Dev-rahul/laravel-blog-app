@@ -25,7 +25,11 @@ const ThreadList = ({ threads, type }) => {
                     key={thread.id}
                     className="bg-white p-4 mb-4 rounded-md shadow-md cursor-pointer"
                 >
-                    <div className="flex items-center mb-4">
+                    <div onClick={() =>
+                        navigate(
+                            `/profile/${thread.author_id}`
+                        )
+                    } className="flex items-center mb-4 z-2">
                         <AvatarIcon name={thread.author_name} />
                         <span className="ml-2 text-gray-700">
                             {thread.author_name}
