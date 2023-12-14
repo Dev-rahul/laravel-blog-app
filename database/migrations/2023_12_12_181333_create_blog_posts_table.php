@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->string("content", 10000);
+            $table->longText("content",);
             $table->bigInteger('likes')->default(0);
             $table->bigInteger('views')->default(0);
             $table->string("author_name");

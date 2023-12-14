@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,10 +25,20 @@ Route::get('/courses', function () {
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Blog APIs
 Route::middleware(['auth:sanctum'])->get('blog',[BlogPostController::class, 'index'] );
 Route::middleware(['auth:sanctum'])->get('blog/{id}',[BlogPostController::class, 'show'] );
 Route::middleware(['auth:sanctum'])->get('blog/liked/{id}',[BlogPostController::class, 'liked'] );
 Route::middleware(['auth:sanctum'])->get('blog/disliked/{id}',[BlogPostController::class, 'disliked'] );
-Route::middleware(['auth:sanctum'])->post('blog/create',[BlogPostController::class, 'store'] );
+Route::middleware(['auth:sanctum'])->post('blog',[BlogPostController::class, 'store'] );
+Route::middleware(['auth:sanctum'])->patch('blog/{id}',[BlogPostController::class, 'update'] );
+
+
+//comments APIs
+
+Route::middleware(['auth:sanctum'])->post('comment',[CommentController::class, 'store'] );
+Route::middleware(['auth:sanctum'])->patch('comment/{id}',[CommentController::class, 'update'] );
+
 
 

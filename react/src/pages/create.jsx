@@ -43,7 +43,7 @@ function Create(props) {
         const plainText = unprivilegedEditor.getText();
         console.log('data', content, plainText)
 
-        axios.post('/api/blog/create', {
+        axios.post('/api/blog', {
             title: title,
             content : content,
             author_id: user.id,
