@@ -56,4 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class,'author_id');
     }
+
+    public function localGuardian() {
+        return $this->hasOne(LocalGuardian::class, 'student_id');
+    }
 }

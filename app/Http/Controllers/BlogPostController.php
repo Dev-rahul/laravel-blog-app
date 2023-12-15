@@ -14,7 +14,7 @@ class BlogPostController extends Controller
     public function index(Request $request)
     {
         $page = $request->input('page', 1);
-        $blogs =  BlogPost::orderBy('created_at', 'desc')->paginate(2, ['*'], 'page', $page);
+        $blogs =  BlogPost::with('categories',)->orderBy('created_at', 'desc')->paginate(2, ['*'], 'page', $page);
      
 
        return response()->json($blogs);
@@ -51,7 +51,11 @@ class BlogPostController extends Controller
         $post->author_name = $validatedData['author_name'];
         $post->plain_text = $validatedData['plain_text'];
 
+
+        $categoryId = $request->input('category_id');
         $post->save();
+        $post->categories()->attach($categoryId);
+
 
         return response()->json(['status' => __(true)]);
 

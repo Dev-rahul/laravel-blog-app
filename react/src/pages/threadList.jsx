@@ -25,7 +25,7 @@ const ThreadList = ({ threads, type }) => {
                     key={thread.id}
                     className="bg-white p-4 mb-4 rounded-md shadow-md cursor-pointer"
                 >
-                    <div onClick={() =>
+                    <div         onClick={() =>
                         navigate(
                             `/profile/${thread.author_id}`
                         )
@@ -56,8 +56,13 @@ const ThreadList = ({ threads, type }) => {
                             <span className="text-gray-500">
                                 {thread.likes}
                             </span>
+                            <div className="mx-2">
+                            {thread.categories && thread.categories.map((cat)=> (  <span className="text-gray-500 mr-1">
+                                #{cat.name}
+                            </span>))}
+                            </div>
                         </div>
-                        {user.id === thread.author_id ? (
+                        {user&& user.id === thread.author_id ? (
                             <div>
                                 <button
                                     onClick={(e) => {

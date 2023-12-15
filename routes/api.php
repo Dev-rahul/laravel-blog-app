@@ -4,6 +4,10 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LocalGuardianController;
+use App\Http\Controllers\PostcodeController;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,5 +48,16 @@ Route::middleware(['auth:sanctum'])->patch('comment/{id}',[CommentController::cl
 
 //Profile APIs
 Route::middleware(['auth:sanctum'])->get('profile/{id}',[UserProfileController::class, 'show'] );
+
+//categories APIs
+Route::middleware(['auth:sanctum'])->get('category',[CategoryController::class, 'index'] );
+
+
+//postcode APIs
+Route::post('/postcode', [PostcodeController::class, 'index']);
+
+//localGauaridan APIs
+Route::get('localGuardian', [LocalGuardianController::class, 'show']);
+Route::post('localGuardian', [LocalGuardianController::class, 'store']);
 
 

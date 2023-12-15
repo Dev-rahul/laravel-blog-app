@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('local_guardians', function (Blueprint $table) {
+        Schema::create('category_post', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->integer("contact_number");
-            $table->string("relationship");
-            $table->string("address");
-            $table->bigInteger('student_id')->unsigned();
-            $table->foreign('student_id')->references('id')->on('users')
+            $table->bigInteger('blog_post_id')->unsigned();
+            $table->foreign('blog_post_id')->references('id')->on('blog_posts')
+                ->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')
                 ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('local_guardians');
+        Schema::dropIfExists('category_post');
     }
 };

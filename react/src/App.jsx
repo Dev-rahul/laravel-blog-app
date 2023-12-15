@@ -11,7 +11,7 @@ import Create from 'pages/create';
 import BlogPost from 'pages/blogPost';
 import Edit from 'pages/edit';
 import Profile from 'pages/profile';
-
+import MyAccount from 'pages/myAccount';
 function App() {
   return (
     <div className="antialiased">
@@ -22,6 +22,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-reset/:token" element={<PasswordReset />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/myAccount" element={<MyAccount />} />
         <Route path="/create" element={<Create />} />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/edit/:id" element={<Edit />} />

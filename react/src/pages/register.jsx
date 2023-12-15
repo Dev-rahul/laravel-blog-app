@@ -79,7 +79,7 @@ const Register = () => {
             />
           </div>
           <div className="mt-4">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="course">Course</Label>
             <CustomList
               id="course_id"
               value={course}
